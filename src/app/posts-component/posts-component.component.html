@@ -1,0 +1,12 @@
+
+<input type="text" class="form-control" (keyup.enter)="createPost(input)" #input>
+<div class="container mt-4">
+    <p>Here is the info from the fake API service</p>
+    <ul *ngFor="let post of posts"> 
+        <li>
+            {{post.email}}
+            <button (click)="deletePost(post)">Delete me!</button>
+        </li>
+    </ul>
+    <!-- <p>{{posts}}</p> -->
+</div>

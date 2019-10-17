@@ -1,0 +1,50 @@
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="container col-lg-6 offset-lg-3">
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input required minlength="3" maxlength="100" ngModel name="email" #Email="ngModel" (change)="onChange(Email)" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+      <div class="alert alert-danger mt-1" *ngIf="Email.touched && !Email.valid">
+          <div *ngIf="Email.errors.required">
+              This Email Field is required 
+          </div>
+          <div *ngIf="Email.errors.minlength">
+               Minimum 3 Characters are required 
+          </div>
+          <!-- <div *ngIf="Email.errors.pattern">
+            Pattern doesn't match
+          </div> -->
+      </div>
+      <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input required ngModel name="password" #pass="ngModel" type="password" class="form-control" id="password" placeholder="Password">
+        <div class="alert alert-danger mt-1" *ngIf="pass.touched && !pass.valid">
+            Password is required, Please enter strong Password
+        </div>
+    </div>
+    <div class="form-group form-check">
+      <input required ngModel name="checkbox" #check="ngModel" type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+      <div class="alert alert-danger mt-1" *ngIf="check.touched && !check.valid">Check the checkbox</div>
+    </div>
+    <div class="form-group">
+      <label for="contactMethod">Contact Method</label>
+      <select ngModel name="contactMethod" id="contactMethod">
+        <!-- setting values of the options dynamically from the API -->
+        <option value=""></option>
+        <!-- <option *ngFor="let option of optionsPop" [ngValue]="option">{{option.name}}</option> -->
+        <option *ngFor="let option of optionsPop" [value]="option.id">{{option.name}}</option>
+      </select>
+    </div>
+    <div class="radio" *ngFor="let radio of radioPop">
+      <label>
+        <input ngModel name="radioPop" type="radio" [value]="radio.id">
+        {{ radio.name }}
+      </label>
+    </div>
+    <p>
+      {{ f.value | json }}
+    </p>
+    <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+  </form>
+

@@ -1,0 +1,38 @@
+
+<form #f="ngForm" class="container col-lg-6 offset-lg-3 mt-4">
+    <div class="form-group">
+        <label for="name">Course Name</label>
+        <input required minlength="5" ngModel name="name" #Name="ngModel"  type="text" class="form-control" id="name">
+        <div class="alert alert-danger mt-1" *ngIf="Name.touched && !Name.valid">
+            <div *ngIf="Name.errors.required">
+                Name is required 
+            </div>
+            <div *ngIf="Name.errors.minlength">
+                    Name should be minimum 5 characters
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="contactMethod">Category</label>
+        <select required ngModel name="categoryMethod" id="categoryMethod" #category="ngModel">
+            <!-- setting values of the options dynamically from the API -->
+            <option value=""></option>
+            <option *ngFor="let option of optionsPop" [value]="option.id">{{option.course}}</option>
+        </select>
+        <div class="alert alert-danger mt-1" *ngIf="category.touched && !category.valid">
+            <div *ngIf="category.errors.required">
+                Category is required 
+            </div>
+        </div>
+    </div>
+    <div class="form-group form-check">
+        <input required ngModel name="hasGurantee" #check="ngModel" type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">30 days money back gurantee</label>
+        <!-- <div class="alert alert-danger mt-1" *ngIf="check.touched && !check.valid">Check the checkbox</div> -->
+     </div>
+    <p>
+      {{ f.value | json }}
+    </p>
+    <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+</form>
+   
